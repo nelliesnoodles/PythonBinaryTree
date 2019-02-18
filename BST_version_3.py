@@ -241,11 +241,46 @@ class BinaryTree(object):
             return replacement, primary_branch
 ########  TWO child nodes are present #############
         elif primaryleft == True:
-            #print("primaryleft is True: ", node.key)
-            # if on the left side of root, left branches are possibly
-            # limitless.  We want to find the bottom of the right node
-            # the right node branch has to terminate at the limit which will
-            # be the root_nodes value
+            # On the left of root, any left 'less than' branch can be
+            # potentially limitless, so we want to traverse a right branch of the
+            # left child, and place the right child there.
+            right_key = node.right.key
+            right_value = node.right.value
+            if node.right.left != None:
+                right_left = node.right.left
+            else:
+                right_left = None
+            if node.right.right != None:
+                right_right = node.right.right
+            else:
+                right_right = None
+
+            newnode = BinaryTreeNode(right_key, right_value, right_left, right_right)
+            left_branch = node.left
+            # We are on the RIGHT branch.
+            # find the bottom most right node of the left branch
+            # move the right node down
+            self._find_bottom_right(left_branch, newnode)
+
+            replacement = node.left
+
+            # Take care of PRIMARY branches, change root_nodes pointer
+            # we are on the left branch of root
+
+            if node == root_left:
+                self.root_node.left = replacement
+                primary_branch = True
+
+            return replacement, primary_branch
+
+
+
+        elif primaryright == True:
+            #print("primaryright is True: ", node.key)
+            # potentially limitless branch is anything traveling
+            # right,  'more than'
+            # traversing a left branch is safest, possible fastest
+
 
             left_key = node.left.key
             left_value = node.left.value
@@ -268,22 +303,14 @@ class BinaryTree(object):
 
             replacement = node.right
 
-            # We are on the left side of the root
-            if node == root_left:
-                self.root_node.left = replacement
+            # We are on the right side of the root
+            if node == root_right:
+                self.root_node.right = replacement
                 primary_branch = True
 
 
             return replacement, primary_branch
-
-        elif primaryright == True:
-            #print("primaryright is True: ", node.key)
-            # this is on the right side of root.
-            # right branches are potentially limitless
-            # find the bottom of left branch because it has a limit
-            # that is where right child should go (newnode)
-            # replacement will be the left child
-
+#########
             right_key = node.right.key
             right_value = node.right.value
             if node.right.left != None:
