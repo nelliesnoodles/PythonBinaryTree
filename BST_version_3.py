@@ -311,34 +311,7 @@ class BinaryTree(object):
 
             return replacement, primary_branch
 #########
-            right_key = node.right.key
-            right_value = node.right.value
-            if node.right.left != None:
-                right_left = node.right.left
-            else:
-                right_left = None
-            if node.right.right != None:
-                right_right = node.right.right
-            else:
-                right_right = None
-
-            newnode = BinaryTreeNode(right_key, right_value, right_left, right_right)
-            left_branch = node.left
-            # We are on the RIGHT branch.
-            # find the bottom most right node of the left branch
-            # move the right node down
-            self._find_bottom_right(left_branch, newnode)
-
-            replacement = node.left
-
-            # Take care of PRIMARY branches, change root_nodes pointer
-            # we are on the right branch of root
-
-            if node == root_right:
-                self.root_node.right = replacement
-                primary_branch = True
-
-            return replacement, primary_branch
+         
 
         else:
             #do nothing:
