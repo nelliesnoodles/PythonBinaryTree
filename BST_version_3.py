@@ -150,11 +150,10 @@ class BinaryTree(object):
 
     def _find_bottom_left(self, node, newleaf):
         """
-        Correction:
-        We want the right most leaf of a the root_node's PRIMARY
-        left branch.
-        And the left most leaf of the root_node's PRIMARY right branch.
-        Depending on the branch, find the leaf in which to place the newnode.
+
+        We want the left most leaf of a the node's PRIMARY
+        right branch.
+
         """
         # change this to recurrsion when able
         while node != None:
@@ -166,11 +165,10 @@ class BinaryTree(object):
 
     def _find_bottom_right(self, node, newleaf):
         """
-        Correction:
-        We want the right most leaf of a the root_node's PRIMARY
+
+        We want the right most leaf of a the node's PRIMARY
         left branch.
-        And the left most leaf of the root_node's PRIMARY right branch.
-        Depending on the branch, find the leaf in which to place the newnode.
+
         """
         # change this to recurrsion when able
         while node != None:
@@ -249,7 +247,6 @@ class BinaryTree(object):
             # the right node branch has to terminate at the limit which will
             # be the root_nodes value
 
-
             left_key = node.left.key
             left_value = node.left.value
             if node.left.left != None:
@@ -260,6 +257,7 @@ class BinaryTree(object):
                 left_right = node.left.right
             else:
                 left_right = None
+
 
             newnode = BinaryTreeNode(left_key, left_value, left_left, left_right)
             right_branch = node.right
@@ -285,6 +283,7 @@ class BinaryTree(object):
             # find the bottom of left branch because it has a limit
             # that is where right child should go (newnode)
             # replacement will be the left child
+
             right_key = node.right.key
             right_value = node.right.value
             if node.right.left != None:
