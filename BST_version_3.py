@@ -257,7 +257,7 @@ class BinaryTree(object):
 
             newnode = BinaryTreeNode(right_key, right_value, right_left, right_right)
             left_branch = node.left
-            # We are on the RIGHT branch.
+            # We are on the LEFT branch.
             # find the bottom most right node of the left branch
             # move the right node down
             self._find_bottom_right(left_branch, newnode)
@@ -296,8 +296,8 @@ class BinaryTree(object):
 
             newnode = BinaryTreeNode(left_key, left_value, left_left, left_right)
             right_branch = node.right
-            # left PRIMARY branch, find the limited right branch bottom
-            # place newnode (left child) there with _find_bottom_right()
+            # RIGHT PRIMARY branch, find the limited left branch bottom
+            # place newnode (right child) there with _find_bottom_left()
             ### find LEAF node on the left most of the right node
             self._find_bottom_left(right_branch, newnode)
 
@@ -545,96 +545,3 @@ class BinaryTree(object):
         if something:
             alist.append(something.key)
 
-### PYTEST FAIL:
-### FIXED, SIMPLE typo was error
-
-#redwood = BinaryTree(11.5)
-#redlist = []
-#for i in range(0, 40):
-    #x = randint(0, 40)
-    #if x not in redlist:
-        #redlist.append(x)
-    #redwood.set(x, 'not 40')
-#assert redwood.count != 40
-#length_redlist = len(redlist)
-#for i in range(0, length_redlist):
-    #redwood.delete(redlist[i])
-    #print('deleting : ', redlist[i])
-
-#redwood.dump() ## size incorrect, is empty
-#assert redwood._size == 0
-#countfunction = redwood.count()
-#print('redwood count=', countfunction)
-
-
-### LEFT MANUAL TESTS ####
-### manual delete function tests, left side of median::
-#oaktree = BinaryTree(10.5)
-#oaktree.set(2, 'two')
-#oaktree.set(9, 'nine')
-#oaktree.set(1, 'one')
-#oaktree.set(3, 'three')
-#oaktree.set(8, 'eight')
-#oaktree.set(4, 'four')
-#oaktree.set(7, 'seven')
-#oaktree.set(5, 'five')
-#oaktree.set(6, 'six')
-#oaktree.delete(9)
-#print("tested tree's size before delete = ", oaktree._size)
-#for i in range(0, 160):
-    #oaktree.delete(i)
-    #print(i)
-#oaktree.dump()
-
-#### RIGHT MANUAL TESTS ####
-# change median to test both sides
-#fartwaffle = BinaryTree(18.5)
-#fartwaffle.set(17, 'seventeen')
-#fartwaffle.set(11, 'eleven')
-#fartwaffle.set(20, 'twenty')
-#fartwaffle.set(12, 'twelve')
-#fartwaffle.set(19, 'nineteen')
-#fartwaffle.set(13, 'thirteen')
-#fartwaffle.set(14, 'fourteen')
-#fartwaffle.set(18, 'eighteen')
-#fartwaffle.set(16, 'sixteen')
-#fartwaffle.set(15, 'fifteen')
-#fartwaffle.set(23, 'twenty-three')
-#fartwaffle.set(22, 'twenty-two')
-#fartwaffle.set(24, 'twenty-four')
-#print("size of tested tree before =", fartwaffle._size)
-#fartwaffle.dump()
-#for i in range(0, 28):
-    #fartwaffle.delete(i)
-    #print(i)
-#fartwaffle.dump()
-
-##########  manual delete from pytest #####
-
-#def test_delete():
-
-    #redwood = BinaryTree(11.5)
-    #redlist = []
-    #for i in range(0, 40):
-        #x = randint(0, 40)
-        #if x not in redlist:
-            #redlist.append(x)
-        #redwood.set(x, 'not 40')
-    #red_length = len(redlist)
-    #print(redlist)
-    #for i in range(0, red_length):
-        #item = redlist[i]
-        #apple = redwood.get(item)
-        #if apple != 'not 40':
-            #print("^^^^^^^^^^^^missing: ^^^^^^^^^^^ \n", item)
-    #assert redwood.count != 40
-    #length_redlist = len(redlist)
-    #assert redwood._size == length_redlist
-    #for i in range(0, length_redlist):
-        #redwood.delete(redlist[i])
-    #print(redwood._size)
-    #redwood.dump()
-    #assert redwood._size == 0
-
-
-#test_delete()
